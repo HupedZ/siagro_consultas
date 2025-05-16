@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096629224231",
+    "project_id": "fz-consultass",
+    "storage_bucket": "fz-consultass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096629224231:android:39905601e7328c1ffc1f02",
+        "android_client_info": {
+          "package_name": "com.example.fz_consultas2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7syZwSjZK3sdJWxkQJOxX28-_ZGQ4qRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
