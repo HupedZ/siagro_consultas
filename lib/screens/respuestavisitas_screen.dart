@@ -169,7 +169,7 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                                }
                              },
                              child: const Text(
-                                'Abrir ubicacion en Google Maps',
+                                'Abrir ubicacion',
                                style: TextStyle(color: Colors.white),
                              ),
                            )
