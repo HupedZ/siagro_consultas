@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fz_consultas/postgre/conection_database.dart';
+import 'package:fz_consultas/providers/login_form_provider.dart';
 import 'package:fz_consultas/screens/listaclientes__screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
@@ -101,7 +102,7 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
   @override
   Widget build(BuildContext context) {
     final dbProvider = Provider.of<DBProvider>(context);
-
+    final loginForm = Provider.of<LoginFormProvider>(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -153,11 +154,12 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
                 child: const Icon(Icons.search),
               ),
             ]),
-          TextFormField(
-            controller: codigoController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Código de Vendedor'),
+          Text('Vendedor: ${loginForm.usuario}',
+          style: const TextStyle(
+                  fontSize: 20
+                ),
           ),
+          const SizedBox(height: 10),
           ValueListenableBuilder(
             valueListenable: tipoSeleccionado,
             builder: (context, value, _) => DropdownButtonFormField<String>(

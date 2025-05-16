@@ -13,6 +13,7 @@ import 'package:fz_consultas/screens/visitas_screen.dart';
 import 'package:provider/provider.dart';
 void main() async{ 
 
+
   runApp(
     MultiProvider(
       providers: [
