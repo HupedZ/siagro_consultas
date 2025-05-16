@@ -141,15 +141,16 @@ class _RegistrarVisitasFormState extends State<_ConsultarVisitasForm> {
                 onPressed: () async {
 
                   if (clienteCodigo == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Debe seleccionar la próxima fecha')),
-                    );
-                    return;
-                  }
+                    await dbProvider.consultarListaVisitaB(
+                    context,
+                    clienteCodigo ?? '',
+                  );
+                  }else{
                   await dbProvider.consultarListaVisita(
                     context,
                     clienteCodigo ?? '',
                   );
+                  }
                 },
                 child: const Text('Consultar Visita'),
                 style: ElevatedButton.styleFrom(

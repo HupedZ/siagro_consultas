@@ -449,6 +449,54 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
     }
     return resultados;
   }
+  Future<List<ResultadoListaVisitas>> consultarListaVisitaB(BuildContext context, String? codigo) async {
+    final conn = await _connect();
+    List<ResultadoListaVisitas> resultados = [];
+    try {
+      await conn.open();
+
+      final results = await conn.query(
+        'SELECT vis_id, vis_usuario, vis_coment, vis_foto, vis_client, vis_fechah, vis_proxim, vis_latitud, vis_longitud, vis_estado, cli_nombre, vis_tipo FROM visitas, clientes WHERE cli_codigo = vis_client',
+        substitutionValues: {'codigo': codigo},
+      );
+
+      for (var row in results) {
+      resultados.add(ResultadoListaVisitas(
+      vendedor: row[1]?.toString() ?? '',
+      code: row[4]?.toString() ?? '',
+      fecha: row[5]?.toString() ?? '',
+      estado: row[9]?.toString() ?? '',
+      nombre: 'TODOS',
+      tipo: row[11]?.toString() ?? '',
+      visid: row[0]?.toString() ?? '',     
+      ));
+      
+ }
+
+      if (resultados.isNotEmpty) {
+       Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ListaVisitasScreen(
+            articulos: resultados,
+          ),
+        ),
+      );
+      } else {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+        content: Text('¡Codigo de Barra Invalido!'),
+        backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
+        ),
+        );
+      }
+    } finally {
+      await conn.close();
+      //notifyListeners();
+    }
+    return resultados;
+  }
   Future<List<ResultadoVisitas>> consultarVisita(BuildContext context, String? codigo, String fecha) async {
     final conn = await _connect();
     List<ResultadoVisitas> resultados = [];

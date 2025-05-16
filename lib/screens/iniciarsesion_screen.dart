@@ -29,14 +29,8 @@ class IniciarsesionScreen extends StatelessWidget {
                     const SizedBox(height: 10,),
                     Text('Iniciar Sesión', style: Theme.of(context).textTheme.headlineMedium,),
                     const SizedBox(height: 30,),
-
-                    MultiProvider(
-                        providers: [
-                        ChangeNotifierProvider(create: (_) => DBProvider(),),
-                        ChangeNotifierProvider(create: (_) => LoginFormProvider(), ),
-                        ],
-                        child: _LoginForm()
-                    )                      
+                    _LoginForm()
+                                        
                   ]
                   
                 )
