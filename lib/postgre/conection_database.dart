@@ -24,6 +24,7 @@ class ResultadoListaVisitas{
   final String tipo;
   final String estado;
   final String visid;
+  final String? comment;
 
 
 
@@ -35,6 +36,7 @@ class ResultadoListaVisitas{
     required this.tipo,
     required this.estado,
     required this.visid,
+    required this.comment,
 
   });
 }
@@ -420,7 +422,8 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
       estado: row[9]?.toString() ?? '',
       nombre: row[10]?.toString() ?? '',
       tipo: row[11]?.toString() ?? '',
-      visid: row[0]?.toString() ?? '',     
+      visid: row[0]?.toString() ?? '',   
+      comment: row[2]?.toString() ?? '',   
       ));
       
  }
@@ -438,7 +441,7 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-        content: Text('¡Codigo de Barra Invalido!'),
+        content: Text('¡No se encontraron visitas con ese Nombre!'),
         backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
         ),
         );
@@ -468,7 +471,8 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
       estado: row[9]?.toString() ?? '',
       nombre: 'TODOS',
       tipo: row[11]?.toString() ?? '',
-      visid: row[0]?.toString() ?? '',     
+      visid: row[0]?.toString() ?? '',
+      comment: row[2]?.toString() ?? '',      
       ));
       
  }
@@ -486,7 +490,7 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-        content: Text('¡Codigo de Barra Invalido!'),
+        content: Text('¡No se encontraron visitas con ese Nombre!'),
         backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
         ),
         );

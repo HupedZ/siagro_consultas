@@ -75,6 +75,7 @@ flutter:
   assets:
      - assets/siagro_logo.png
      - assets/siagro_logoc.png
+     - assets/icono.png
      - assets/uniport.jpg
      - assets/uniport2.jpg
      - assets/deposito2.jpg

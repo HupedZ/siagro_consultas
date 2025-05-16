@@ -74,21 +74,34 @@ class ListaVisitasScreen extends StatelessWidget {
                            borderRadius: BorderRadius.circular(15),
                          ),
                           child: Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Expanded(
-                               child: Text(
-                                 '${articulo.fecha}    Vendedor: ${articulo.vendedor}   Tipo: ${articulo.tipo}',
-                                 style: const TextStyle(
-                                   fontSize: 18,
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.black87,
-                                 ),
-                               ),
-                             ),
-                             Icon(Icons.arrow_forward_ios, color: Colors.black),
-                            ],
-                                ),
+  children: [
+    const SizedBox(width: 10),
+    Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto a la izquierda
+        children: [
+          Text(
+            '${articulo.fecha}    Vdd: ${articulo.vendedor}    ${articulo.tipo}',
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 4), // Espacio entre las dos líneas
+          Text(
+            articulo.comment ?? '', // Acá va tu texto nuevo
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black54,
+            ),
+          ),
+        ],
+      ),
+    ),
+    const Icon(Icons.arrow_forward_ios, color: Colors.black),
+  ],
+),
                         ),
                       ),
                    ),

@@ -192,7 +192,7 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                             final bool confirmacion = await showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: const Text('¿Estás seguro de eliminar esta imagen?', style: TextStyle(fontSize: 16) ),
+                                        title: const Text('¿Estás seguro de eliminar esta visita?', style: TextStyle(fontSize: 16) ),
                                         content: const Text('Esta acción no se puede deshacer.'),
                                         actions: [
                                 TextButton(
@@ -201,7 +201,7 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                                     Navigator.pop(context, true);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                    content: Text('¡Imagen Eliminada!'),
+                                    content: Text('¡Visita!'),
                                     backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
                                     ),
                                   );

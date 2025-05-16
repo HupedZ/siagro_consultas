@@ -175,7 +175,7 @@ class _ConsultaForm extends StatelessWidget  {
                     break;
                   case 'Referencia':
                     try {
-                      await dbProvider.consultarR(context, consultaForm.referencia, valorDelTextFormField!);
+                      await dbProvider.consultarR(context, consultaForm.referencia.toUpperCase(), valorDelTextFormField!);
                     } catch(e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

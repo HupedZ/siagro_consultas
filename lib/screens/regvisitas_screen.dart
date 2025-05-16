@@ -66,7 +66,6 @@ class _RegistrarVisitasForm extends StatefulWidget {
 }
 
 class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
-  final TextEditingController codigoController = TextEditingController();
   final TextEditingController comentarioController = TextEditingController();
   final TextEditingController clientController = TextEditingController();
   final ValueNotifier<String> tipoSeleccionado = ValueNotifier<String>('Maquinaria');
@@ -79,7 +78,6 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
 
   @override
   void dispose() {
-    codigoController.dispose();
     comentarioController.dispose();
     clientController.dispose();
     tipoSeleccionado.dispose();
@@ -308,10 +306,16 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
                     );
                     return;
                   }
-
+                  if (clienteCodigo == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Debe seleccionar un cliente')),
+                    );
+                    return;
+                  }
+                  try{
                   await dbProvider.registrarvisita(
                     DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                    codigoController.text,
+                    loginForm.usuario,
                     tipoSeleccionado.value.substring(0, 3),
                     comentarioController.text,
                     DateFormat('yyyy-MM-dd').format(proxima),
@@ -327,6 +331,13 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
                     backgroundColor: Colors.green,
                     ),
                   );
+                  }catch(e){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('No se pudo registrar $e'),
+                    backgroundColor: Colors.red,
+                    ),
+                  );
+                  }
                 },
                 child: const Text('Registrar Visita'),
                 style: ElevatedButton.styleFrom(
