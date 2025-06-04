@@ -1,12 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fz_consultas/postgre/conection_database.dart';
-import 'package:fz_consultas/providers/login_form_provider.dart';
 import 'package:fz_consultas/screens/imagencasa_screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

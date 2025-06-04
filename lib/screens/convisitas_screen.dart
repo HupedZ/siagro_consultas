@@ -1,16 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fz_consultas/postgre/conection_database.dart';
 import 'package:fz_consultas/screens/listaclientes__screen.dart';
-import 'package:fz_consultas/screens/listavisitas_screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 

@@ -7,7 +7,6 @@ import 'package:fz_consultas/screens/listaclientes__screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -231,19 +230,12 @@ class _RegistrarVisitasFormState extends State<_RegistrarVisitasForm> {
                         // Mostrar SnackBar o lo que desees
                       }
                     if (imageUrl != null) {
-                      try{
-                      // Llamar a la función para actualizar el registro en la base de datos
-                    //await DBProvider().actualizarFCasa1(imageUrl, clienteCodigo!,);
-                    // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                content: Text('¡Imagen Almacenada correctamente!'),
                                backgroundColor: Colors.green, // Puedes personalizar el color de fondo.
                             ),
                           );
-                    }catch(e){
-                    // ignore: use_build_context_synchronously
-                      }
                     }
                     }catch(e){
                       // ignore: use_build_context_synchronously
