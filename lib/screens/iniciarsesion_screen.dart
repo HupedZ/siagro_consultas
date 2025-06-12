@@ -21,7 +21,7 @@ class IniciarsesionScreen extends StatelessWidget {
           child: Column(
             children: [
 
-              const SizedBox(height:220),
+              const SizedBox(height:240),
 
               CardContainer(
                 child: Column(

@@ -41,7 +41,6 @@ class ListaClientesWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       onClienteSeleccionado(cliente.nombre, cliente.code);
-                      Navigator.of(context).pop(); // Cerrar el modal
                     },
                     child: Container(
                       padding: const EdgeInsets.all(15),

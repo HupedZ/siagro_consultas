@@ -44,13 +44,13 @@ class _BottomIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 100), // Ajusta el espacio entre la imagen y el borde inferior
+      padding: const EdgeInsets.only(bottom: 70), // Ajusta el espacio entre la imagen y el borde inferior
       child: Container(
         width: double.infinity,
         alignment: Alignment.bottomCenter, // Alinea la imagen en la parte inferior del contenedor
         child: Image.asset(
           'assets/siagro_logoc.png',
-          scale: 3,
+          scale: 2.2,
           fit: BoxFit.cover, // Ajusta la imagen para que cubra todo el contenedor
         ),
       ),
@@ -88,8 +88,10 @@ class _GreenBox extends StatelessWidget {
   BoxDecoration _greenBackground() {
     return const BoxDecoration(
       gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
-          Color.fromARGB(255, 255, 255, 255),
+          Color.fromARGB(255, 254, 242, 209),
           Color.fromARGB(255, 255, 255, 255),
         ]
       )

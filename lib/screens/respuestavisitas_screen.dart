@@ -4,7 +4,6 @@ import 'package:fz_consultas/postgre/conection_database.dart';
 import 'package:fz_consultas/screens/imagencasa_screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -270,51 +269,4 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
     }
   }
 }
-}
-class _RespuestaVisitasForm extends StatefulWidget {
-  const _RespuestaVisitasForm({super.key});
-
-  @override
-  State<_RespuestaVisitasForm> createState() => _RespuestaVisitasFormState();
-}
-
-class _RespuestaVisitasFormState extends State<_RespuestaVisitasForm> {
-  final TextEditingController comentarioController = TextEditingController();
-  final ValueNotifier<DateTime?> proximaFechaSeleccionada = ValueNotifier<DateTime?>(null);
-
-  String? clienteCodigo;
-
-  @override
-  void dispose() {
-    comentarioController.dispose();
-    proximaFechaSeleccionada.dispose();
-    super.dispose();
-  }
-
-  Future<void> _seleccionarFecha(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null) {
-      proximaFechaSeleccionada.value = picked;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final dbProvider = Provider.of<DBProvider>(context);
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          
-        ],
-      ),
-    );
-  }
 }

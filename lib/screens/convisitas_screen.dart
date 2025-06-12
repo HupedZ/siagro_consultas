@@ -20,7 +20,7 @@ class ConsultarVisitasScreen extends StatelessWidget {
 class _ConsultarVisitasScreenContent extends StatelessWidget {
   _ConsultarVisitasScreenContent({super.key});
 
-  final GlobalKey<_RegistrarVisitasFormState> _formKey = GlobalKey<_RegistrarVisitasFormState>();
+  final GlobalKey<_ConsultarVisitasFormState> _formKey = GlobalKey<_ConsultarVisitasFormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,10 @@ class _ConsultarVisitasForm extends StatefulWidget {
   const _ConsultarVisitasForm({super.key});
 
   @override
-  State<_ConsultarVisitasForm> createState() => _RegistrarVisitasFormState();
+  State<_ConsultarVisitasForm> createState() => _ConsultarVisitasFormState();
 }
 
-class _RegistrarVisitasFormState extends State<_ConsultarVisitasForm> {
+class _ConsultarVisitasFormState extends State<_ConsultarVisitasForm> {
   final TextEditingController codigoController = TextEditingController();
   final TextEditingController clientController = TextEditingController();
 

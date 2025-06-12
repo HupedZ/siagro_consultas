@@ -32,8 +32,8 @@ class _HeaderIcon extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(top:30),
-        child: Image.asset('assets/siagro_logoc.png', scale: 3,),
+        margin: const EdgeInsets.only(top:0, bottom: 660),
+        child: Image.asset('assets/siagro_logoc.png', scale: 2,),
         ),
       );    
   }
@@ -70,12 +70,12 @@ class _GreenBox extends StatelessWidget {
       decoration: _greenBackground(),
       child: const Stack(
         children: [
-          Positioned(top:290, left: 5,child: _Bubble(),),
+          /*Positioned(top:290, left: 5,child: _Bubble(),),
           Positioned(top:220, right: 5,child: _Bubble(),),
           Positioned(top:500, right: -25,child: _Bubble(),),
           Positioned(top:500, left: -25,child: _Bubble(),),
           Positioned(top:-40, left: -30,child: _Bubble(),),
-          Positioned(top:-50, right: -20,child: _Bubble(),),
+          Positioned(top:-50, right: -20,child: _Bubble(),),*/
 
         ],
       ),
@@ -85,8 +85,10 @@ class _GreenBox extends StatelessWidget {
   BoxDecoration _greenBackground() {
     return const BoxDecoration(
       gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
-          Color.fromARGB(255, 255, 255, 255),
+          Color.fromARGB(255, 254, 242, 209),
           Colors.white,
         ]
       )

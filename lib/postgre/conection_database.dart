@@ -607,20 +607,6 @@ Future<void> eliminarvisita(String visid) async {
       telefo: row[2] as String,
       ));
  }
-      
-
-      if (resultados.isNotEmpty) {
-        // ignore: use_build_context_synchronously
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrarVisitasScreen(resultados: resultados)));
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-        content: Text('¡No existe un cliente con ese nombre!'),
-        backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
-        ),
-        );
-      }
     } finally {
       await conn.close();
       //notifyListeners();

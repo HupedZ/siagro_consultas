@@ -14,7 +14,8 @@ class SeleccionarScreen extends StatelessWidget {
       body: AuthSBackground(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 30),
               // Primer botón

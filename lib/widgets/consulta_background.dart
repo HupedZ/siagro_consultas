@@ -30,8 +30,8 @@ class _HeaderIcon extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(top:18),
-        child: Image.asset('assets/siagro_logoc.png', scale: 3,),
+        margin: const EdgeInsets.only(top:0, bottom: 580),
+        child: Image.asset('assets/siagro_logoc.png', scale: 2.2,),
         ),
       );    
   }
@@ -64,10 +64,12 @@ class _OrangeBox extends StatelessWidget {
 
   BoxDecoration _orangeBackground() {
     return const BoxDecoration(
-      gradient: LinearGradient(
+      gradient: LinearGradient( 
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
-          Color.fromRGBO(244, 246, 244, 1),
-          Color.fromRGBO(244, 246, 244, 1),
+          Color.fromARGB(255, 254, 242, 209),
+          Color.fromRGBO(255, 251, 231, 1),
         ]
       )
     );
