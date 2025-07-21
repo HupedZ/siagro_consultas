@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fz_consultas/screens/bienvenida_screen.dart';
 import 'package:fz_consultas/screens/listavisitas_screen.dart';
-import 'package:fz_consultas/screens/regvisitas_screen.dart';
 import 'package:fz_consultas/screens/respuesta_screen.dart';
 import 'package:fz_consultas/screens/respuestavisitas_screen.dart';
 import 'package:postgres/postgres.dart';
@@ -204,7 +203,42 @@ Future<List<ResultadoBusqueda>> consultarR(BuildContext context, String referenc
     }
     return resultados;
   }
+Future<List<ResultadoBusqueda>> obtenerSugerenciasPorReferencia(String referencia) async {
+  final conn = await _connect();
+  List<ResultadoBusqueda> resultados = [];
 
+  try {
+    await conn.open();
+
+    final results = await conn.query(
+      '''
+      SELECT art_codigo, art_descri, art_barra, art_cospro, art_preven, art_unidad, sto_cantid, sto_deposi, art_ubica, art_imagen, art_codbar 
+      FROM articulo, stock 
+      WHERE sto_articu = art_codigo and art_barra LIKE @ref
+      ''',
+      substitutionValues: {'ref': '%$referencia%'},
+    );
+
+    for (var row in results) {
+      resultados.add(ResultadoBusqueda(
+        code: row[0] as String,
+        refe: row[2] as String,
+        articulo: row[1] as String,
+        stock: double.parse(row[6] as String),
+        stockd: int.parse(row[7] as String),
+        precioc: double.parse(row[3] as String),
+        precio: double.parse(row[4] as String),
+        ubica: row[8] as String,
+        imgurl: row[9] as String?,
+        codigoB: row[10] as String?
+      ));
+    }
+  } finally {
+    await conn.close();
+  }
+
+  return resultados;
+}
     
   
 
@@ -469,7 +503,7 @@ Future<List<ResultadoListaVisitas>> consultarListaVisita(BuildContext context, S
       code: row[4]?.toString() ?? '',
       fecha: row[5]?.toString() ?? '',
       estado: row[9]?.toString() ?? '',
-      nombre: 'TODOS',
+      nombre: row[10]?.toString() ?? 'SIN NOMBRE',
       tipo: row[11]?.toString() ?? '',
       visid: row[0]?.toString() ?? '',
       comment: row[2]?.toString() ?? '',      
@@ -613,46 +647,6 @@ Future<void> eliminarvisita(String visid) async {
     }
     return resultados;
   }
-  Future<List<ResultadoCliente>> consultarImagenCli(BuildContext context, String codigo) async {
-    final conn = await _connect();
-    List<ResultadoCliente> resultados = [];
-
-    try {
-      await conn.open();
-
-      final results = await conn.query(
-        'SELECT vis_ubica, vis_foto FROM visitas WHERE vis_client = @ref',
-        substitutionValues: {'ref': '%$codigo%'},
-      );
-
-      
-      for (var row in results) {
-      resultados.add(ResultadoCliente(
-      code: row[0] as String,
-      nombre: row[1] as String,
-      telefo: row[2] as String,
-      ));
- }
-      
-
-      if (resultados.isNotEmpty) {
-        // ignore: use_build_context_synchronously
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrarVisitasScreen(resultados: resultados)));
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-        content: Text('¡No existe un cliente con ese nombre!'),
-        backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
-        ),
-        );
-      }
-    } finally {
-      await conn.close();
-      //notifyListeners();
-    }
-    return resultados;
-  }
   Future<void> eliminarImagenCasa1(String codigo) async {
   final conn = await _connect();
 
@@ -684,6 +678,23 @@ Future<void> actualizarRegistro(String nuevoImageUrl, String codigo) async {
     await conn.execute(
       'INSERT INTO imagenes (img_articu, img_url) VALUES (@codigo, @imageUrl)',
       substitutionValues: {'imageUrl': nuevoImageUrl, 'codigo': codigo},
+    );
+  } finally {
+    await conn.close();
+  }
+  
+
+}
+Future<void> actualizarEstado(String estado, String codigo) async {
+  final conn = await _connect();
+
+  try {
+    await conn.open();
+
+    // Actualizar el campo de imagen en la primera tabla
+    await conn.execute(
+      'UPDATE visitas SET vis_estado = @estado WHERE vis_id = @codigo',
+      substitutionValues: {'estado': estado, 'codigo': codigo},
     );
   } finally {
     await conn.close();

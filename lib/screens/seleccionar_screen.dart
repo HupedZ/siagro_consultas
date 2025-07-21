@@ -13,6 +13,7 @@ class SeleccionarScreen extends StatelessWidget {
       ),
       body: AuthSBackground(
         child: SingleChildScrollView(
+          child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,6 +105,7 @@ class SeleccionarScreen extends StatelessWidget {
               ),
             ],
           ),
+          )
         ),
       ),
     );

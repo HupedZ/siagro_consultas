@@ -60,7 +60,6 @@ class _LoginForm extends StatelessWidget {
         children: [
           TextFormField(
             autocorrect: false,
-            keyboardType: TextInputType.number,
             decoration: InputDecorations.authInputDecoration(
               hintText: '',
               labelText: 'Numero de Vendedor',

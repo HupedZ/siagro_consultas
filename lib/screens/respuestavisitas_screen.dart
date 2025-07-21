@@ -27,6 +27,7 @@ class _RespuestaVisitasScreenContent extends StatefulWidget {
 class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenContent> {
   int _indexActual = 0;
   late List<ResultadoVisitas> _resultados;
+  String _estadoSeleccionado = '';
 
   @override
   void didChangeDependencies() {
@@ -50,6 +51,21 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
       });
     }
   }
+  Widget _buildCheckOption(String code, String label) {
+      return Column(
+        children: [
+          Checkbox(
+            value: _estadoSeleccionado == code,
+            onChanged: (val) {
+              setState(() {
+                _estadoSeleccionado = code;
+             });
+            },
+         ),
+          Text(label, style: const TextStyle(fontSize: 12)),
+        ],
+      );
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -172,6 +188,41 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                              ),
                            )
                         ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildCheckOption('F', 'Frío'),
+                            _buildCheckOption('T', 'Tibio'),
+                            _buildCheckOption('C', 'Caliente'),
+                            _buildCheckOption('MC', 'Muy Caliente'),
+                            IconButton(
+                              onPressed: () async {
+                                if (_estadoSeleccionado.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Selecciona un estado antes de actualizar'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                await DBProvider().actualizarEstado(_estadoSeleccionado, visita.visid);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Estado actualizado correctamente'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              },
+                             icon: const Icon(Icons.update, color: Colors.orange, size: 30),
+                            ),
+                          ],
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -29,13 +29,11 @@ class _HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        margin: const EdgeInsets.only(top:0, bottom: 660),
-        child: Image.asset('assets/siagro_logoc.png', scale: 2,),
-        ),
-      );    
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top:20, bottom: 660),
+      child: Image.asset('assets/siagro_logoc.png', scale: 2.5,),
+    );   
   }
 }
 class _BottomIcon extends StatelessWidget {

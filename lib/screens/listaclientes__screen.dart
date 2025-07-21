@@ -13,6 +13,9 @@ class ListaClientesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<ResultadoCliente> clientesOrdenados = List.from(resultados)
+    ..sort((a, b) => int.parse(a.code).compareTo(int.parse(b.code)));
+
     return Container(
       height: 400,
       padding: const EdgeInsets.all(8),
@@ -29,9 +32,9 @@ class ListaClientesWidget extends StatelessWidget {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: resultados.length,
+              itemCount: clientesOrdenados.length,
               itemBuilder: (context, index) {
-                final cliente = resultados[index];
+                final cliente = clientesOrdenados[index];
                 return Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
