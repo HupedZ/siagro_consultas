@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:fz_consultas/postgre/conection_database.dart';
 import 'package:fz_consultas/screens/imagencasa_screen.dart';
 import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class RespuestaVisitasScreen extends StatelessWidget {
   final List<ResultadoVisitas> resultados;
@@ -17,14 +15,17 @@ class RespuestaVisitasScreen extends StatelessWidget {
     return _RespuestaVisitasScreenContent();
   }
 }
+
 class _RespuestaVisitasScreenContent extends StatefulWidget {
   const _RespuestaVisitasScreenContent({super.key});
 
   @override
-  State<_RespuestaVisitasScreenContent> createState() => _RespuestaVisitasScreenContentState();
+  State<_RespuestaVisitasScreenContent> createState() =>
+      _RespuestaVisitasScreenContentState();
 }
 
-class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenContent> {
+class _RespuestaVisitasScreenContentState
+    extends State<_RespuestaVisitasScreenContent> {
   int _indexActual = 0;
   late List<ResultadoVisitas> _resultados;
   String _estadoSeleccionado = '';
@@ -51,26 +52,26 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
       });
     }
   }
+
   Widget _buildCheckOption(String code, String label) {
-      return Column(
-        children: [
-          Checkbox(
-            value: _estadoSeleccionado == code,
-            onChanged: (val) {
-              setState(() {
-                _estadoSeleccionado = code;
-             });
-            },
-         ),
-          Text(label, style: const TextStyle(fontSize: 12)),
-        ],
-      );
-    }
+    return Column(
+      children: [
+        Checkbox(
+          value: _estadoSeleccionado == code,
+          onChanged: (val) {
+            setState(() {
+              _estadoSeleccionado = code;
+            });
+          },
+        ),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final visita = _resultados[_indexActual];
-    
 
     return Scaffold(
       appBar: AppBar(
@@ -92,101 +93,124 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 16),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Cliente: ${visita.nombre}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Fecha: ${visita.fecha}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Vendedor: ${visita.vendedor}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Comentario: ${visita.coment}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Tipo: ${visita.tipo}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Estado: ${visita.estado ?? 'No tiene registrado ningun estado'}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       ListTile(
                         title: Text(
                           'Próxima Fecha: ${visita.proxfecha}',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const Divider(height: 4,),
+                      const Divider(
+                        height: 4,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if(visita.imgurl.isNotEmpty)
-                          IconButton(
-                           onPressed: () {
-                            try{
-                            Navigator.push(
-                                context,
-                               MaterialPageRoute(
-                                 builder: (context) => FullScreenImageCasa(
-                                    code: visita.nombre,
-                                    imageCasa1: visita.imgurl,
-                                    visid: visita.visid,
-                                    fecha: visita.fecha
-                                    ),
-                               ),
-                             );
-                            }catch(e){
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Hay un error al ver la imagen o no tiene imagen guardada: $e'),
-                                   backgroundColor: Colors.red,
-                                    ),
-                
-                                 );
-                            }
-                           },
-                           icon: const Icon(Icons.image, color: Colors.orange, size: 45,)),
-                           if(visita.latitud.isNotEmpty)
-                             MaterialButton(
-                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                             color: Colors.blue,
-                             onPressed: () async {
+                          if (visita.imgurl.isNotEmpty)
+                            IconButton(
+                                onPressed: () {
+                                  try {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            FullScreenImageCasa(
+                                                code: visita.nombre,
+                                                imageCasa1: visita.imgurl,
+                                                visid: visita.visid,
+                                                fecha: visita.fecha),
+                                      ),
+                                    );
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'Hay un error al ver la imagen o no tiene imagen guardada: $e'),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                                icon: const Icon(
+                                  Icons.image,
+                                  color: Colors.orange,
+                                  size: 45,
+                                )),
+                          if (visita.latitud.isNotEmpty)
+                            MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              color: Colors.blue,
+                              onPressed: () async {
                                 try {
-                                 // Llamamos a la función que maneja la apertura de Google Maps
-                                 await openGoogleMaps(context, double.parse(visita.latitud), double.parse(visita.longitud));
-                               } catch (e) {
-                                 
-                               }
-                             },
-                             child: const Text(
+                                  // Llamamos a la función que maneja la apertura de Google Maps
+                                  await openGoogleMaps(
+                                      context,
+                                      double.parse(visita.latitud),
+                                      double.parse(visita.longitud));
+                                } catch (e) {}
+                              },
+                              child: const Text(
                                 'Abrir ubicacion',
-                               style: TextStyle(color: Colors.white),
-                             ),
-                           )
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
                         ],
                       ),
                       Padding(
@@ -203,23 +227,27 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                                 if (_estadoSeleccionado.isEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text('Selecciona un estado antes de actualizar'),
+                                      content: Text(
+                                          'Selecciona un estado antes de actualizar'),
                                       backgroundColor: Colors.red,
                                     ),
                                   );
                                   return;
                                 }
 
-                                await DBProvider().actualizarEstado(_estadoSeleccionado, visita.visid);
+                                await DBProvider().actualizarEstado(
+                                    _estadoSeleccionado, visita.visid);
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Estado actualizado correctamente'),
+                                    content: Text(
+                                        'Estado actualizado correctamente'),
                                     backgroundColor: Colors.green,
                                   ),
                                 );
                               },
-                             icon: const Icon(Icons.update, color: Colors.orange, size: 30),
+                              icon: const Icon(Icons.update,
+                                  color: Colors.orange, size: 30),
                             ),
                           ],
                         ),
@@ -228,56 +256,69 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                            onPressed:  _mostrarAnterior,
+                            onPressed: _mostrarAnterior,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              foregroundColor: Colors.white
-                            ),
+                                backgroundColor: Colors.orange,
+                                foregroundColor: Colors.white),
                             child: const Text('Anterior'),
                           ),
-                          IconButton(onPressed: ()async{
-                            final bool confirmacion = await showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: const Text('¿Estás seguro de eliminar esta visita?', style: TextStyle(fontSize: 16) ),
-                                        content: const Text('Esta acción no se puede deshacer.'),
-                                        actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    // Si el usuario confirma, cerrar el cuadro de diálogo y devolver true
-                                    Navigator.pop(context, true);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                    content: Text('¡Visita!'),
-                                    backgroundColor: Colors.red, // Puedes personalizar el color de fondo.
-                                    ),
-                                  );
-                                 },
-                                  child: const Text('Si, quiero eliminar', style: TextStyle(fontSize: 16)),
-                                ),
-                                const SizedBox(width: 30,),
-                                TextButton(
-                                  onPressed: () {
-                                    // Si el usuario cancela, cerrar el cuadro de diálogo y devolver false
-                                    Navigator.pop(context, false);
-                                  },
-                                  child: const Text('Cancelar', style: TextStyle(fontSize: 16)),
-                                ),
-                              ],
-                            ),
-                          );
-                            if (confirmacion == true) {
-                            await DBProvider().eliminarvisita(visita.visid);
-                            Navigator.pop(context);
-                          }
-                          }, 
-                          icon: const Icon(Icons.delete, color: Colors.red, size: 30,)),
+                          IconButton(
+                              onPressed: () async {
+                                final bool confirmacion = await showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text(
+                                        '¿Estás seguro de eliminar esta visita?',
+                                        style: TextStyle(fontSize: 16)),
+                                    content: const Text(
+                                        'Esta acción no se puede deshacer.'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          // Si el usuario confirma, cerrar el cuadro de diálogo y devolver true
+                                          Navigator.pop(context, true);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text('¡Visita!'),
+                                              backgroundColor: Colors
+                                                  .red, // Puedes personalizar el color de fondo.
+                                            ),
+                                          );
+                                        },
+                                        child: const Text('Si, quiero eliminar',
+                                            style: TextStyle(fontSize: 16)),
+                                      ),
+                                      const SizedBox(
+                                        width: 30,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          // Si el usuario cancela, cerrar el cuadro de diálogo y devolver false
+                                          Navigator.pop(context, false);
+                                        },
+                                        child: const Text('Cancelar',
+                                            style: TextStyle(fontSize: 16)),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                if (confirmacion == true) {
+                                  await DBProvider()
+                                      .eliminarvisita(visita.visid);
+                                  Navigator.pop(context);
+                                }
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                                size: 30,
+                              )),
                           ElevatedButton(
                             onPressed: _mostrarSiguiente,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              foregroundColor: Colors.white
-                            ),
+                                backgroundColor: Colors.orange,
+                                foregroundColor: Colors.white),
                             child: const Text('Siguiente'),
                           ),
                         ],
@@ -292,32 +333,36 @@ class _RespuestaVisitasScreenContentState extends State<_RespuestaVisitasScreenC
       ),
     );
   }
-  Future<void> openGoogleMaps(BuildContext context, double latitude, double longitude) async {
-  final Uri geoUri = Uri.parse('geo:$latitude,$longitude?q=$latitude,$longitude');
-  final Uri fallbackUrl = Uri.parse('https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
 
-  print("Intentando abrir geo URI: $geoUri");
+  Future<void> openGoogleMaps(
+      BuildContext context, double latitude, double longitude) async {
+    final Uri geoUri =
+        Uri.parse('geo:$latitude,$longitude?q=$latitude,$longitude');
+    final Uri fallbackUrl = Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
 
-  try {
-    if (await canLaunchUrl(geoUri)) {
-      print("Lanzando geo URI...");
-      await launchUrl(geoUri, mode: LaunchMode.externalApplication);
-    } else if (await canLaunchUrl(fallbackUrl)) {
-      print("geo URI falló, lanzando fallback HTTP...");
-      await launchUrl(fallbackUrl, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'No se puede lanzar ni geo ni fallback';
-    }
-  } catch (e) {
-    print("Error: $e");
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('No se pudo abrir Google Maps: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+    print("Intentando abrir geo URI: $geoUri");
+
+    try {
+      if (await canLaunchUrl(geoUri)) {
+        print("Lanzando geo URI...");
+        await launchUrl(geoUri, mode: LaunchMode.externalApplication);
+      } else if (await canLaunchUrl(fallbackUrl)) {
+        print("geo URI falló, lanzando fallback HTTP...");
+        await launchUrl(fallbackUrl, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'No se puede lanzar ni geo ni fallback';
+      }
+    } catch (e) {
+      print("Error: $e");
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('No se pudo abrir Google Maps: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
-}
 }

@@ -11,44 +11,37 @@ import 'package:provider/provider.dart';
 class IniciarsesionScreen extends StatelessWidget {
   const IniciarsesionScreen({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: AuthBackground(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-
-              const SizedBox(height:240),
-
-              CardContainer(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10,),
-                    Text('Iniciar Sesión', style: Theme.of(context).textTheme.headlineMedium,),
-                    const SizedBox(height: 30,),
-                    _LoginForm()
-                                        
-                  ]
-                  
-                )
-              ),
-              
-
-            ],
+        resizeToAvoidBottomInset: false,
+        body: AuthBackground(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 240),
+                CardContainer(
+                    child: Column(children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Iniciar Sesión',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _LoginForm()
+                ])),
+              ],
+            ),
           ),
-        ),
-      )       
-    );
-    
+        ));
   }
 }
 
 class _LoginForm extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
@@ -61,23 +54,19 @@ class _LoginForm extends StatelessWidget {
           TextFormField(
             autocorrect: false,
             decoration: InputDecorations.authInputDecoration(
-              hintText: '',
-              labelText: 'Numero de Vendedor',
-              prefixIcon: Icons.person
-            ),
-            onChanged: ( value ) => loginForm.usuario = value,
-            validator: ( value ) {
-    
-                  return ( value != null && value.isNotEmpty ) 
-                    ? null
-                    : 'El numero de vendedor es obligatorio';                                    
-                  
-              },
-    
+                hintText: '',
+                labelText: 'Numero de Vendedor',
+                prefixIcon: Icons.person),
+            onChanged: (value) => loginForm.usuario = value,
+            validator: (value) {
+              return (value != null && value.isNotEmpty)
+                  ? null
+                  : 'El numero de vendedor es obligatorio';
+            },
           ),
-    
-          const SizedBox(height: 30,),
-    
+          const SizedBox(
+            height: 30,
+          ),
           TextFormField(
             autocorrect: false,
             obscureText: true,
@@ -87,41 +76,40 @@ class _LoginForm extends StatelessWidget {
               labelText: 'Contraseña',
               prefixIcon: Icons.lock,
             ),
-            onChanged: ( value ) => loginForm.password = value,
-            validator: ( value ) {
-    
-                  return ( value != null && value.trim().length >= 2 ) 
-                    ? null
-                    : 'La contraseña es obligatoria';                                    
-                  
-              },
-          ),
-          
-          const SizedBox(height: 30,),
-    
-          MaterialButton(             
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            elevation: 0,
-            color: Colors.orangeAccent,
-            onPressed: loginForm.isLoading ? null : () async {
-              if (!loginForm.isValidForm()) return ;
-              loginForm.isLoading = false;       
-              await dbProvider.iniciar(context, loginForm.usuario, loginForm.password);             
+            onChanged: (value) => loginForm.password = value,
+            validator: (value) {
+              return (value != null && value.trim().length >= 2)
+                  ? null
+                  : 'La contraseña es obligatoria';
             },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              child: Text(
-                loginForm.isLoading
-                  ? 'Espere'
-                  : 'Ingresar',
-                style: const TextStyle(color: Colors.white),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: Colors.orangeAccent,
+              onPressed: loginForm.isLoading
+                  ? null
+                  : () async {
+                      if (!loginForm.isValidForm()) return;
+                      loginForm.isLoading = false;
+                      await dbProvider.iniciar(
+                          context, loginForm.usuario, loginForm.password);
+                    },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                child: Text(
+                  loginForm.isLoading ? 'Espere' : 'Ingresar',
+                  style: const TextStyle(color: Colors.white),
                 ),
-                
-            ) 
-            )
-      ],),
+              ))
+        ],
+      ),
     );
-    
   }
 }

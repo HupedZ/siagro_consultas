@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ConsultaFormProvider extends ChangeNotifier {
-
   GlobalKey<FormState> cformKey = GlobalKey<FormState>();
   var codigoBarra = '';
   var time = DateTime.now();
@@ -18,32 +15,29 @@ class ConsultaFormProvider extends ChangeNotifier {
 
   String get opcionSeleccionada => _opcionSeleccionada;
 
-
-
-  
-
   setOpcionSeleccionada(String value) {
     _opcionSeleccionada = value;
     notifyListeners();
   }
-  
- 
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-  set isLoading( bool value ){
+  set isLoading(bool value) {
     _isLoading = value;
     notifyListeners();
   }
+
   bool _switchValue = false;
-  
+
   bool get switchValue => _switchValue;
 
   void setSwitchValue(bool value) {
     _switchValue = value;
     notifyListeners();
   }
+
   bool _switchValuer = false;
-  
+
   bool get switchValuer => _switchValuer;
 
   void setSwitchValuer(bool value2) {
@@ -51,10 +45,11 @@ class ConsultaFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isValidForm(){
+  bool isValidForm() {
     //print('aqui entre en ingresar');
     return cformKey.currentState?.validate() ?? false;
   }
+
   bool _showImage = false;
 
   bool get showImage => _showImage;
@@ -63,7 +58,4 @@ class ConsultaFormProvider extends ChangeNotifier {
     _showImage = !_showImage;
     notifyListeners();
   }
-  
 }
-
-

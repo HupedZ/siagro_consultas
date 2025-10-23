@@ -5,10 +5,8 @@ import 'package:fz_consultas/widgets/cardreg_container.dart';
 import 'package:fz_consultas/widgets/consulta_background.dart';
 import 'package:provider/provider.dart';
 
-
 class ConsultarVisitasScreen extends StatelessWidget {
   final List<ResultadoListaVisitas> resultados;
-  
 
   const ConsultarVisitasScreen({super.key, required this.resultados});
 
@@ -17,10 +15,12 @@ class ConsultarVisitasScreen extends StatelessWidget {
     return _ConsultarVisitasScreenContent();
   }
 }
+
 class _ConsultarVisitasScreenContent extends StatelessWidget {
   _ConsultarVisitasScreenContent({super.key});
 
-  final GlobalKey<_ConsultarVisitasFormState> _formKey = GlobalKey<_ConsultarVisitasFormState>();
+  final GlobalKey<_ConsultarVisitasFormState> _formKey =
+      GlobalKey<_ConsultarVisitasFormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,11 @@ class _ConsultarVisitasScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    Text('Consultar Visita', style: Theme.of(context).textTheme.headlineMedium),
+                    Text('Consultar Visita',
+                        style: Theme.of(context).textTheme.headlineMedium),
                     const SizedBox(height: 10),
-                    _ConsultarVisitasForm(key: _formKey), // <- Usamos el GlobalKey aquí
+                    _ConsultarVisitasForm(
+                        key: _formKey), // <- Usamos el GlobalKey aquí
                   ],
                 ),
               ),
@@ -51,6 +53,7 @@ class _ConsultarVisitasScreenContent extends StatelessWidget {
     );
   }
 }
+
 class _ConsultarVisitasForm extends StatefulWidget {
   const _ConsultarVisitasForm({super.key});
 
@@ -89,59 +92,60 @@ class _ConsultarVisitasFormState extends State<_ConsultarVisitasForm> {
                   textCapitalization: TextCapitalization.characters,
                 ),
               ),
-              
             ],
           ),
-          const SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-          ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orangeAccent,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () async {
-                  final texto = clientController.text.trim().toUpperCase();
-                  final resultados = await dbProvider.consultarN(context, texto, texto);
-
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) {
-                      return ListaClientesWidget(
-                        resultados: resultados,
-                        onClienteSeleccionado: (nombre, codigo) {
-                          setState(() {
-                            clientController.text = nombre;
-                            clienteCodigo = codigo;
-                          });
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  );
-                },
-                child: const Icon(Icons.search),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orangeAccent,
+                foregroundColor: Colors.white,
               ),
-            ]),
-          const SizedBox(height: 30,),
+              onPressed: () async {
+                final texto = clientController.text.trim().toUpperCase();
+                final resultados =
+                    await dbProvider.consultarN(context, texto, texto);
+
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return ListaClientesWidget(
+                      resultados: resultados,
+                      onClienteSeleccionado: (nombre, codigo) {
+                        setState(() {
+                          clientController.text = nombre;
+                          clienteCodigo = codigo;
+                        });
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
+                );
+              },
+              child: const Icon(Icons.search),
+            ),
+          ]),
+          const SizedBox(
+            height: 30,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () async {
-
                   if (clienteCodigo == null) {
                     await dbProvider.consultarListaVisitaB(
-                    context,
-                    clienteCodigo ?? '',
-                  );
-                  }else{
-                  await dbProvider.consultarListaVisita(
-                    context,
-                    clienteCodigo ?? '',
-                  );
+                      context,
+                      clienteCodigo ?? '',
+                    );
+                  } else {
+                    await dbProvider.consultarListaVisita(
+                      context,
+                      clienteCodigo ?? '',
+                    );
                   }
                 },
                 child: const Text('Consultar Visita'),

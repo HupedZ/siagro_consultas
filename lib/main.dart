@@ -11,9 +11,8 @@ import 'package:fz_consultas/screens/respuesta_screen.dart';
 import 'package:fz_consultas/screens/seleccionar_screen.dart';
 import 'package:fz_consultas/screens/visitas_screen.dart';
 import 'package:provider/provider.dart';
-void main() async{ 
 
-
+void main() async {
   runApp(
     MultiProvider(
       providers: [
@@ -25,12 +24,10 @@ void main() async{
       child: const MyApp(),
     ),
   );
-  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +36,28 @@ class MyApp extends StatelessWidget {
       title: 'Fz Consultas',
       //home: const IniciarsesionScreen(),
       initialRoute: 'iniciarsesion',
-      routes:{
+      routes: {
         'iniciarsesion': (BuildContext context) => const IniciarsesionScreen(),
-        'bienvenida': (BuildContext context) =>  WelcomeScreen(username: '',),
-        'seleccionar'     : (BuildContext context) => SeleccionarScreen(),
-        'consulta'     : (BuildContext context) => const ConsultaScreen(),
-        'visitas'     : (BuildContext context) => const VisitasScreen(),
-        'regvisitas'     : (BuildContext context) => const RegistrarVisitasScreen(resultados: [],),
-        'convisitas'     : (BuildContext context) => const ConsultarVisitasScreen(resultados: [],),
-        'respuesta'    : (BuildContext context) => const RespuestaForm(resultados: [], currentIndex: 0, busquedaText: '',),
+        'bienvenida': (BuildContext context) => WelcomeScreen(
+              username: '',
+            ),
+        'seleccionar': (BuildContext context) => SeleccionarScreen(),
+        'consulta': (BuildContext context) => const ConsultaScreen(),
+        'visitas': (BuildContext context) => const VisitasScreen(),
+        'regvisitas': (BuildContext context) => const RegistrarVisitasScreen(
+              resultados: [],
+            ),
+        'convisitas': (BuildContext context) => const ConsultarVisitasScreen(
+              resultados: [],
+            ),
+        'respuesta': (BuildContext context) => const RespuestaForm(
+              resultados: [],
+              currentIndex: 0,
+              busquedaText: '',
+            ),
       },
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[300]
-      ),
-      
+      theme:
+          ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey[300]),
     );
-    
   }
 }

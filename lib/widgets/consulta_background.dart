@@ -30,10 +30,13 @@ class _HeaderIcon extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(top:0, bottom: 580),
-        child: Image.asset('assets/siagro_logoc.png', scale: 2.2,),
+        margin: const EdgeInsets.only(top: 0, bottom: 580),
+        child: Image.asset(
+          'assets/siagro_logoc.png',
+          scale: 2.2,
         ),
-      );    
+      ),
+    );
   }
 }
 
@@ -42,7 +45,6 @@ class _OrangeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
@@ -64,15 +66,13 @@ class _OrangeBox extends StatelessWidget {
 
   BoxDecoration _orangeBackground() {
     return const BoxDecoration(
-      gradient: LinearGradient( 
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
           Color.fromARGB(255, 254, 242, 209),
           Color.fromRGBO(255, 251, 231, 1),
-        ]
-      )
-    );
+        ]));
   }
 }
 
@@ -86,9 +86,8 @@ class _Bubble extends StatelessWidget {
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color:const Color.fromARGB(255, 216, 202, 130)
-      ),
+          borderRadius: BorderRadius.circular(100),
+          color: const Color.fromARGB(255, 216, 202, 130)),
     );
   }
 }

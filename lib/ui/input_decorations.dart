@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
 
 class InputDecorations {
-
-  static InputDecoration authInputDecoration({
-    required String hintText,
-    required String labelText,
-    IconData? prefixIcon
-  }){
+  static InputDecoration authInputDecoration(
+      {required String hintText,
+      required String labelText,
+      IconData? prefixIcon}) {
     return InputDecoration(
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color:Colors.orangeAccent
-                  ),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color:Colors.orangeAccent,
-                    width: 2
-                  )
-                ),
-                hintText: hintText,
-                labelText: labelText,
-                labelStyle: const TextStyle(
-                  color: Colors.grey
-                ),
-                prefixIcon:prefixIcon != null
-                 ? Icon(prefixIcon, color:Colors.orangeAccent)
-                 : null
-              );
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.orangeAccent),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.orangeAccent, width: 2)),
+        hintText: hintText,
+        labelText: labelText,
+        labelStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: prefixIcon != null
+            ? Icon(prefixIcon, color: Colors.orangeAccent)
+            : null);
   }
-
 }

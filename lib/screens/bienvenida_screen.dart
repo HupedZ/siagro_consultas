@@ -10,7 +10,8 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -29,7 +30,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     _controller.forward();
 
     Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, 'seleccionar'); // Cambia 'consulta' por el nombre de tu pantalla principal.
+      Navigator.pushReplacementNamed(context,
+          'seleccionar'); // Cambia 'consulta' por el nombre de tu pantalla principal.
     });
   }
 

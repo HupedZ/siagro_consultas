@@ -14,7 +14,7 @@ class ListaClientesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<ResultadoCliente> clientesOrdenados = List.from(resultados)
-    ..sort((a, b) => int.parse(a.code).compareTo(int.parse(b.code)));
+      ..sort((a, b) => int.parse(a.code).compareTo(int.parse(b.code)));
 
     return Container(
       height: 400,
@@ -40,7 +40,8 @@ class ListaClientesWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   elevation: 5,
-                  margin: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                   child: InkWell(
                     onTap: () {
                       onClienteSeleccionado(cliente.nombre, cliente.code);
@@ -64,7 +65,8 @@ class ListaClientesWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+                          const Icon(Icons.arrow_forward_ios,
+                              color: Colors.grey),
                         ],
                       ),
                     ),

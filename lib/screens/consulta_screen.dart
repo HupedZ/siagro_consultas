@@ -12,9 +12,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ConsultaScreen extends StatelessWidget {
-   
   const ConsultaScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,39 +25,42 @@ class ConsultaScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
-              const SizedBox(height:200),
-
-
+              const SizedBox(height: 200),
               CardCContainer(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10,),
-                    Text('Consulta', style: Theme.of(context).textTheme.headlineMedium,),
-                    const SizedBox(height: 10,),
-
-                    MultiProvider(
-                        providers: [
-                        ChangeNotifierProvider(create: (_) => DBProvider(),),
-                        ChangeNotifierProvider(create: (_) => ConsultaFormProvider(),),
-                        ChangeNotifierProvider(create: (_) => LoginFormProvider(), ),
-                        ],
-                        child: _ConsultaForm(),
-                  
-                    
-                    )   
-                                     
-                  ]
-                  
+                  child: Column(children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Consulta',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (_) => DBProvider(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) => ConsultaFormProvider(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) => LoginFormProvider(),
+                    ),
+                  ],
+                  child: _ConsultaForm(),
                 )
-              ),
+              ])),
             ],
           ),
         ),
-        ),
+      ),
     );
   }
 }
+
 // ignore: must_be_immutable
 class _ConsultaForm extends StatefulWidget {
   const _ConsultaForm({super.key});
@@ -81,37 +83,37 @@ class _ConsultaFormState extends State<_ConsultaForm> {
     super.initState();
     Get.put(ConsultaFormProvider());
   }
+
   void dispose() {
-  _controller.dispose();
-  super.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 
   void _onReferenciaChanged(String value, DBProvider dbProvider) async {
-  if (value.trim().isEmpty) return;
+    if (value.trim().isEmpty) return;
 
-  setState(() {
-    isLoading = true;
-  });
-
-  final currentQuery = ++_queryCounter;
-
-  final resultados =
-      await dbProvider.obtenerSugerenciasPorReferencia(value.toUpperCase());
-
-  // Sólo si no hubo otra consulta después, actualiza la lista
-  if (currentQuery == _queryCounter) {
     setState(() {
-      sugerencias = resultados;
-      isLoading = false;
+      isLoading = true;
     });
+
+    final currentQuery = ++_queryCounter;
+
+    final resultados =
+        await dbProvider.obtenerSugerenciasPorReferencia(value.toUpperCase());
+
+    // Sólo si no hubo otra consulta después, actualiza la lista
+    if (currentQuery == _queryCounter) {
+      setState(() {
+        sugerencias = resultados;
+        isLoading = false;
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
     final consultaForm = Provider.of<ConsultaFormProvider>(context);
     final dbProvider = Provider.of<DBProvider>(context);
-    
 
     return Form(
       key: consultaForm.cformKey,
@@ -130,34 +132,35 @@ class _ConsultaFormState extends State<_ConsultaForm> {
             child: Column(
               children: [
                 TextFormField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  labelText: _getLabelText(dropdownValue),
-                  prefixIcon: const Icon(Icons.search),
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    labelText: _getLabelText(dropdownValue),
+                    prefixIcon: const Icon(Icons.search),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      valorDelTextFormField = value;
+
+                      if (value.trim().isEmpty) {
+                        sugerencias.clear();
+                        isLoading = false;
+                      } else if (dropdownValue == 'Referencia') {
+                        _onReferenciaChanged(value, dbProvider);
+                      }
+
+                      switch (dropdownValue) {
+                        case 'Codigo':
+                          consultaForm.codigo = value;
+                          break;
+                        case 'Ubicacion':
+                          consultaForm.ubicacion = value;
+                          break;
+                      }
+                    });
+                  },
+                  autovalidateMode: AutovalidateMode
+                      .disabled, // quita la validación inmediata
                 ),
-                onChanged: (value) {
-                  setState(() {
-                   valorDelTextFormField = value;
-
-                    if (value.trim().isEmpty) {
-                      sugerencias.clear();
-                      isLoading = false;
-                    } else if (dropdownValue == 'Referencia') {
-                      _onReferenciaChanged(value, dbProvider);
-                    }
-
-                    switch (dropdownValue) {
-                      case 'Codigo':
-                        consultaForm.codigo = value;
-                        break;
-                      case 'Ubicacion':
-                        consultaForm.ubicacion = value;
-                        break;
-                    }
-                  });
-                },
-                autovalidateMode: AutovalidateMode.disabled, // quita la validación inmediata
-              ),
                 if (isLoading)
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -168,7 +171,8 @@ class _ConsultaFormState extends State<_ConsultaForm> {
                     margin: const EdgeInsets.only(top: 0),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(8)),
                       border: Border.all(color: Colors.orange, width: 1),
                       boxShadow: [
                         BoxShadow(
@@ -258,23 +262,21 @@ class _ConsultaFormState extends State<_ConsultaForm> {
             onPressed: consultaForm.isLoading
                 ? null
                 : () async {
-                  if ((_controller.text).trim().isEmpty) {
-                    _showError(context, 'El campo no puede estar vacío');
-                    return;
-                  }
+                    if ((_controller.text).trim().isEmpty) {
+                      _showError(context, 'El campo no puede estar vacío');
+                      return;
+                    }
                     if (!consultaForm.isValidForm()) return;
                     FocusScope.of(context).unfocus();
 
                     switch (dropdownValue) {
                       case 'Codigo':
                         try {
-                          await dbProvider.consultarC(
-                              context,
-                              consultaForm.codigo,
-                              valorDelTextFormField ?? '');
+                          await dbProvider.consultarC(context,
+                              consultaForm.codigo, valorDelTextFormField ?? '');
                         } catch (e) {
-                          _showError(
-                              context, 'Hubo un error al consultar por código: $e');
+                          _showError(context,
+                              'Hubo un error al consultar por código: $e');
                         }
                         break;
                       case 'Referencia':
@@ -304,8 +306,7 @@ class _ConsultaFormState extends State<_ConsultaForm> {
                     }
                   },
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
                 consultaForm.isLoading ? 'Espere' : 'Buscar',
                 style: const TextStyle(color: Colors.white),

@@ -21,6 +21,7 @@ class ListaVisitasScreen extends StatelessWidget {
       // si vienen de consultarListaVisitaB, sabemos que son todos y diferentes
       return 'TODOS';
     }
+
     String _traducirTipo(String tipo) {
       switch (tipo.trim().toUpperCase()) {
         case 'MAQ':
@@ -33,6 +34,7 @@ class ListaVisitasScreen extends StatelessWidget {
           return tipo; // o poné 'Desconocido'
       }
     }
+
     String _traducirEstado(String estado) {
       switch (estado.trim().toUpperCase()) {
         case 'F':
@@ -47,6 +49,7 @@ class ListaVisitasScreen extends StatelessWidget {
           return estado; // o poné 'Desconocido' si querés
       }
     }
+
     String _formatearFecha(String fecha) {
       try {
         final DateTime date = DateTime.parse(fecha);
@@ -55,79 +58,88 @@ class ListaVisitasScreen extends StatelessWidget {
         return fecha;
       }
     }
+
     final List<ResultadoListaVisitas> articulosOrdenados = List.from(articulos)
-       ..sort((a, b) {
-         DateTime fechaA = DateTime.tryParse(a.fecha) ?? DateTime(1900);
-          DateTime fechaB = DateTime.tryParse(b.fecha) ?? DateTime(1900);
-          return fechaB.compareTo(fechaA); // Más recientes primero
-        });
+      ..sort((a, b) {
+        DateTime fechaA = DateTime.tryParse(a.fecha) ?? DateTime(1900);
+        DateTime fechaB = DateTime.tryParse(b.fecha) ?? DateTime(1900);
+        return fechaB.compareTo(fechaA); // Más recientes primero
+      });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 199, 125),
-        title: const Text('Volver',),
+        title: const Text(
+          'Volver',
+        ),
       ),
       body: Column(
-       crossAxisAlignment: CrossAxisAlignment.start,
-       children: [
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           if (articulosOrdenados.isNotEmpty)
-           Padding(
+            Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Visitas Registradas de: ${_obtenerNombreTitulo(articulosOrdenados)}',
-               style: const TextStyle(
-                 fontSize: 20,
+                style: const TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                 color: Colors.black87,
-               ),
+                  color: Colors.black87,
+                ),
               ),
-           ),
-         Expanded(
+            ),
+          Expanded(
             child: ListView.builder(
-             itemCount: articulosOrdenados.length,
+              itemCount: articulosOrdenados.length,
               itemBuilder: (context, index) {
-               final articulo = articulosOrdenados[index];
-               Color backgroundColor;
-               switch (articulo.estado?.toUpperCase()) {
-                 case 'F': // Frío
-                   backgroundColor = const Color(0xFFB3E5FC); // celeste suave
-                   break;
-                 case 'T': // Tibio
-                   backgroundColor = Color.fromARGB(255, 252, 220, 152); // amarillo claro
-                   break;
-                 case 'C': // Caliente
-                   backgroundColor = Color.fromARGB(255, 250, 174, 60); // naranja medio
-                   break;
-                 case 'MC': // Muy Caliente
-                   backgroundColor = const Color(0xFFF57C00); // naranja intenso
-                   break;
-                 default:
-                   backgroundColor = Colors.grey.shade300; // por defecto
-               }
-               return Column(
+                final articulo = articulosOrdenados[index];
+                Color backgroundColor;
+                switch (articulo.estado?.toUpperCase()) {
+                  case 'F': // Frío
+                    backgroundColor = const Color(0xFFB3E5FC); // celeste suave
+                    break;
+                  case 'T': // Tibio
+                    backgroundColor =
+                        Color.fromARGB(255, 252, 220, 152); // amarillo claro
+                    break;
+                  case 'C': // Caliente
+                    backgroundColor =
+                        Color.fromARGB(255, 250, 174, 60); // naranja medio
+                    break;
+                  case 'MC': // Muy Caliente
+                    backgroundColor =
+                        const Color(0xFFF57C00); // naranja intenso
+                    break;
+                  default:
+                    backgroundColor = Colors.grey.shade300; // por defecto
+                }
+                return Column(
                   children: [
-                   Card(
+                    Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       elevation: 5,
-                      margin: const EdgeInsets.symmetric(horizontal: 7, vertical: 1),
-                     child: InkWell(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 1),
+                      child: InkWell(
                         onTap: () {
-                          _onArticuloTap(context, articulo.code, articulo.fecha);
+                          _onArticuloTap(
+                              context, articulo.code, articulo.fecha);
                         },
                         child: Container(
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                           color: backgroundColor,
-                           borderRadius: BorderRadius.circular(15),
-                         ),
+                            color: backgroundColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           child: Row(
                             children: [
                               const SizedBox(width: 10),
-                             Expanded(
-                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto a la izquierda
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .start, // Alinea el texto a la izquierda
                                   children: [
                                     Text(
                                       '${articulo.nombre}',
@@ -157,7 +169,8 @@ class ListaVisitasScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
-                                     _formatearFecha(articulo.fecha) ?? '', // Acá va tu texto nuevo
+                                      _formatearFecha(articulo.fecha) ??
+                                          '', // Acá va tu texto nuevo
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -165,9 +178,10 @@ class ListaVisitasScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                     // Espacio entre las dos líneas
+                                    // Espacio entre las dos líneas
                                     Text(
-                                     articulo.comment ?? '', // Acá va tu texto nuevo
+                                      articulo.comment ??
+                                          '', // Acá va tu texto nuevo
                                       style: const TextStyle(
                                         fontSize: 14,
                                         color: Colors.black54,
@@ -176,16 +190,17 @@ class ListaVisitasScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.arrow_forward_ios, color: Colors.black),
+                              const Icon(Icons.arrow_forward_ios,
+                                  color: Colors.black),
                             ],
                           ),
                         ),
                       ),
-                   ),
-                   Divider(thickness: 1, color: Colors.grey[300]),
-                 ],
-               );
-             },
+                    ),
+                    Divider(thickness: 1, color: Colors.grey[300]),
+                  ],
+                );
+              },
             ),
           ),
         ],

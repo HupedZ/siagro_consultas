@@ -13,7 +13,7 @@ class SeleccionarScreen extends StatelessWidget {
       ),
       body: AuthSBackground(
         child: SingleChildScrollView(
-          child: Center(
+            child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,15 +28,18 @@ class SeleccionarScreen extends StatelessWidget {
                   width: 400, // Ancho del botón
                   height: 200, // Alto del botón
                   decoration: BoxDecoration(
-                    image:  DecorationImage(
-                      image:const  AssetImage('assets/deposito2.jpg'), // Imagen de fondo
+                    image: DecorationImage(
+                      image: const AssetImage(
+                          'assets/deposito2.jpg'), // Imagen de fondo
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
-                        Colors.black45.withOpacity(0.3), // Aplica un filtro oscuro
+                        Colors.black45
+                            .withOpacity(0.3), // Aplica un filtro oscuro
                         BlendMode.darken,
                       ),
                     ),
-                    borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                    borderRadius:
+                        BorderRadius.circular(10), // Bordes redondeados
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12, // Color de la sombra
@@ -72,10 +75,12 @@ class SeleccionarScreen extends StatelessWidget {
                   height: 200,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/clientes2.jpg'), // Imagen de fondo
+                      image:
+                          AssetImage('assets/clientes2.jpg'), // Imagen de fondo
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
-                        Colors.black45.withOpacity(0.3), // Aplica un filtro oscuro
+                        Colors.black45
+                            .withOpacity(0.3), // Aplica un filtro oscuro
                         BlendMode.darken,
                       ),
                     ),
@@ -105,8 +110,7 @@ class SeleccionarScreen extends StatelessWidget {
               ),
             ],
           ),
-          )
-        ),
+        )),
       ),
     );
   }

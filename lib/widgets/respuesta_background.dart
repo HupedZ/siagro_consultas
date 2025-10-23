@@ -30,10 +30,13 @@ class _HeaderIcon extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(top:1, bottom: 720),
-        child: Image.asset('assets/siagro_logoc.png', scale: 5,),
+        margin: const EdgeInsets.only(top: 1, bottom: 720),
+        child: Image.asset(
+          'assets/siagro_logoc.png',
+          scale: 5,
         ),
-      );    
+      ),
+    );
   }
 }
 
@@ -42,7 +45,6 @@ class _OrangeBoxR extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
@@ -50,11 +52,31 @@ class _OrangeBoxR extends StatelessWidget {
       decoration: _orangeBackground(),
       child: const Stack(
         children: [
-          Positioned(top:90, left: 30,child: _Bubble(),),
-          Positioned(top:-40, left: -30,child: _Bubble(),),
-          Positioned(top:-50, right: -20,child: _Bubble(),),
-          Positioned(bottom:-50, left: 10,child: _Bubble(),),
-          Positioned(bottom:120, right: 20,child: _Bubble(),)
+          Positioned(
+            top: 90,
+            left: 30,
+            child: _Bubble(),
+          ),
+          Positioned(
+            top: -40,
+            left: -30,
+            child: _Bubble(),
+          ),
+          Positioned(
+            top: -50,
+            right: -20,
+            child: _Bubble(),
+          ),
+          Positioned(
+            bottom: -50,
+            left: 10,
+            child: _Bubble(),
+          ),
+          Positioned(
+            bottom: 120,
+            right: 20,
+            child: _Bubble(),
+          )
         ],
       ),
     );
@@ -62,13 +84,10 @@ class _OrangeBoxR extends StatelessWidget {
 
   BoxDecoration _orangeBackground() {
     return const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color.fromRGBO(255, 255, 255, 1),
-          Color.fromRGBO(255, 255, 255, 1)
-        ]
-      )
-    );
+        gradient: LinearGradient(colors: [
+      Color.fromRGBO(255, 255, 255, 1),
+      Color.fromRGBO(255, 255, 255, 1)
+    ]));
   }
 }
 

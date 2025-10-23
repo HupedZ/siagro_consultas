@@ -4,7 +4,8 @@ class FullScreenImage extends StatelessWidget {
   final String? imageUrl;
   final String? code;
 
-  const FullScreenImage({super.key, required this.imageUrl, required this.code});
+  const FullScreenImage(
+      {super.key, required this.imageUrl, required this.code});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +16,12 @@ class FullScreenImage extends StatelessWidget {
       ),
       body: Center(
         child: InteractiveViewer(
-                child: Image.network(
-                  imageUrl!,
-                  width: 500,
-                  height: 500,
-                ),
-              ),
+          child: Image.network(
+            imageUrl!,
+            width: 500,
+            height: 500,
+          ),
+        ),
       ),
     );
   }
